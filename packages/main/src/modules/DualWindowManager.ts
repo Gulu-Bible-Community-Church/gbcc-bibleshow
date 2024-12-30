@@ -1,7 +1,8 @@
-import type {AppModule} from '../AppModule.js';
-import type {ModuleContext} from '../ModuleContext.js';
-import type {AppInitConfig} from '../AppInitConfig.js';
-import {app, BrowserWindow, ipcMain, screen} from 'electron';
+import type { AppModule } from '../AppModule.js';
+import type { ModuleContext } from '../ModuleContext.js';
+import type { AppInitConfig } from '../AppInitConfig.js';
+import { app, BrowserWindow, ipcMain, screen } from 'electron';
+import { MenuBuilder } from './MenuBuilder.js';
 
 interface WindowConfig {
   width: number;
@@ -24,8 +25,8 @@ class DualWindowManager implements AppModule {
   readonly #config: DualWindowManagerConfig;
 
   readonly #defaultMainConfig: WindowConfig = {
-    width: 1024, // Increased from 800
-    height: 768, // Increased from 600
+    width: 1480, // Increased from 800
+    height: 980,
     title: 'Main Window'
   };
 
@@ -45,10 +46,10 @@ class DualWindowManager implements AppModule {
     return displays.find(display => display.id !== primaryDisplay.id);
   }
 
-  async enable({app}: ModuleContext): Promise<void> {
+  async enable({ app }: ModuleContext): Promise<void> {
     console.log('DualWindowManager: Enabling module');
     await app.whenReady();
-    
+
     const mainConfig = this.#getMainWindowConfig();
     console.log('DualWindowManager: Creating main window with config:', mainConfig);
     this.#createMainWindow(mainConfig);
@@ -65,7 +66,7 @@ class DualWindowManager implements AppModule {
 
   #setupIPC() {
     console.log('DualWindowManager: Setting up IPC handlers');
-  
+
     ipcMain.handle('open-secondary-window', () => {
       const externalDisplay = this.#getExternalDisplay();
       if (!externalDisplay) {
@@ -79,10 +80,10 @@ class DualWindowManager implements AppModule {
       this.#createSecondaryWindow(secondaryConfig, externalDisplay);
       return true;
     });
-  
+
     ipcMain.handle('send-to-secondary', (_event, data) => {
       console.log('DualWindowManager: Received data for secondary:', data);
-  
+
       if (!this.#secondaryWindow) {
         const externalDisplay = this.#getExternalDisplay();
         if (!externalDisplay) {
@@ -95,7 +96,7 @@ class DualWindowManager implements AppModule {
         const secondaryConfig = this.#getSecondaryWindowConfig();
         this.#createSecondaryWindow(secondaryConfig, externalDisplay);
       }
-      
+
       this.#secondaryWindow?.webContents.send('display-content', data);
       return true;
     });
@@ -130,6 +131,10 @@ class DualWindowManager implements AppModule {
       minWidth: 800, // Add minimum size constraints
       minHeight: 600,
     });
+
+    // Initialize menu
+    const menuBuilder = new MenuBuilder(this.#mainWindow);
+    menuBuilder.buildMenu();
 
     if (this.#config.openDevTools) {
       this.#mainWindow.webContents.openDevTools();

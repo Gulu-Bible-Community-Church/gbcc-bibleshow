@@ -27,13 +27,9 @@ export async function initApp(initConfig: AppInitConfig) {
         openDevTools: import.meta.env.DEV,
         windowConfig: {
           main: {
-            width: 800,
-            height: 600,
             title: 'Main Window',
           },
           secondary: {
-            width: 600,
-            height: 800,
             title: 'Secondary Window',
           },
         },
@@ -48,9 +44,9 @@ export async function initApp(initConfig: AppInitConfig) {
         new Set(
           initConfig.renderer instanceof URL
             ? [
-                initConfig.renderer.origin,
-                new URL('/secondary', initConfig.renderer).origin,
-              ]
+              initConfig.renderer.origin,
+              new URL('/secondary', initConfig.renderer).origin,
+            ]
             : [],
         ),
       ),
@@ -60,16 +56,16 @@ export async function initApp(initConfig: AppInitConfig) {
         new Set(
           initConfig.renderer instanceof URL
             ? [
-                'https://vite.dev',
-                'https://developer.mozilla.org',
-                'https://solidjs.com',
-                'https://qwik.dev',
-                'https://lit.dev',
-                'https://react.dev',
-                'https://preactjs.com',
-                'https://www.typescriptlang.org',
-                'https://vuejs.org',
-              ]
+              'https://vite.dev',
+              'https://developer.mozilla.org',
+              'https://solidjs.com',
+              'https://qwik.dev',
+              'https://lit.dev',
+              'https://react.dev',
+              'https://preactjs.com',
+              'https://www.typescriptlang.org',
+              'https://vuejs.org',
+            ]
             : [],
         ),
       ),
