@@ -1,8 +1,7 @@
-// packages/main/src/modules/DualWindowManager.ts
 import type {AppModule} from '../AppModule.js';
 import type {ModuleContext} from '../ModuleContext.js';
 import type {AppInitConfig} from '../AppInitConfig.js';
-import {app, BrowserWindow, ipcMain} from 'electron';
+import {app, BrowserWindow, ipcMain, screen} from 'electron';
 
 interface WindowConfig {
   width: number;
@@ -25,19 +24,25 @@ class DualWindowManager implements AppModule {
   readonly #config: DualWindowManagerConfig;
 
   readonly #defaultMainConfig: WindowConfig = {
-    width: 800,
-    height: 600,
+    width: 1024, // Increased from 800
+    height: 768, // Increased from 600
     title: 'Main Window'
   };
 
   readonly #defaultSecondaryConfig: WindowConfig = {
-    width: 600,
-    height: 800,
+    width: 1920, // Set to common full HD width
+    height: 1080, // Set to common full HD height
     title: 'Secondary Window'
   };
 
   constructor(config: DualWindowManagerConfig) {
     this.#config = config;
+  }
+
+  #getExternalDisplay() {
+    const displays = screen.getAllDisplays();
+    const primaryDisplay = screen.getPrimaryDisplay();
+    return displays.find(display => display.id !== primaryDisplay.id);
   }
 
   async enable({app}: ModuleContext): Promise<void> {
@@ -58,58 +63,43 @@ class DualWindowManager implements AppModule {
     this.#setupIPC();
   }
 
-  // #setupIPC(): void {
-  //   console.log('DualWindowManager: Setting up IPC handlers');
-  //   // Handle opening secondary window
-  //   ipcMain.handle('open-secondary-window', () => {
-  //     const secondaryConfig = this.#getSecondaryWindowConfig();
-  //     this.#createSecondaryWindow(secondaryConfig);
-  //   });
-
-  //   // Handle sending data to secondary window
-  //   ipcMain.handle('send-to-secondary', (_event, data: unknown) => {
-  //     console.log('DualWindowManager: Received data to send to secondary:', data);
-      
-  //     if (!this.#secondaryWindow) {
-  //       console.log('DualWindowManager: Secondary window not found, creating new one');
-  //       const secondaryConfig = this.#getSecondaryWindowConfig();
-  //       this.#createSecondaryWindow(secondaryConfig);
-        
-  //       this.#secondaryWindow!.webContents.once('did-finish-load', () => {
-  //         console.log('DualWindowManager: Secondary window loaded, sending data');
-  //         this.#secondaryWindow?.webContents.send('display-content', data);
-  //       });
-  //     } else {
-  //       console.log('DualWindowManager: Sending data to existing secondary window');
-  //       this.#secondaryWindow.webContents.send('display-content', data);
-  //     }
-  //   });
-  // }
   #setupIPC() {
     console.log('DualWindowManager: Setting up IPC handlers');
   
     ipcMain.handle('open-secondary-window', () => {
+      const externalDisplay = this.#getExternalDisplay();
+      if (!externalDisplay) {
+        console.error('No external display detected');
+        // Send error to main window
+        this.#mainWindow?.webContents.send('display-error', 'No external display detected');
+        return false;
+      }
+
       const secondaryConfig = this.#getSecondaryWindowConfig();
-      this.#createSecondaryWindow(secondaryConfig);
+      this.#createSecondaryWindow(secondaryConfig, externalDisplay);
+      return true;
     });
   
     ipcMain.handle('send-to-secondary', (_event, data) => {
       console.log('DualWindowManager: Received data for secondary:', data);
   
       if (!this.#secondaryWindow) {
+        const externalDisplay = this.#getExternalDisplay();
+        if (!externalDisplay) {
+          console.error('No external display detected');
+          this.#mainWindow?.webContents.send('display-error', 'No external display detected');
+          return false;
+        }
+
         console.log('DualWindowManager: Secondary window not found, creating new one');
         const secondaryConfig = this.#getSecondaryWindowConfig();
-        this.#createSecondaryWindow(secondaryConfig);
-  
-        // this.#secondaryWindow.webContents.once('did-finish-load', () => {
-        //   this.#secondaryWindow.webContents.send('display-content', data);
-        // });
-      } else {
-        this.#secondaryWindow.webContents.send('display-content', data);
+        this.#createSecondaryWindow(secondaryConfig, externalDisplay);
       }
+      
+      this.#secondaryWindow?.webContents.send('display-content', data);
+      return true;
     });
   }
-  
 
   #getMainWindowConfig(): WindowConfig {
     return {
@@ -137,6 +127,8 @@ class DualWindowManager implements AppModule {
         sandbox: false,
         preload: this.#config.initConfig.preload.path,
       },
+      minWidth: 800, // Add minimum size constraints
+      minHeight: 600,
     });
 
     if (this.#config.openDevTools) {
@@ -155,18 +147,20 @@ class DualWindowManager implements AppModule {
     });
   }
 
-  #createSecondaryWindow(config: WindowConfig): void {
+  #createSecondaryWindow(config: WindowConfig, externalDisplay: Electron.Display): void {
     if (this.#secondaryWindow) {
       console.log('DualWindowManager: Secondary window exists, focusing');
       this.#secondaryWindow.focus();
       return;
     }
 
-    console.log('DualWindowManager: Creating secondary window');
+    console.log('DualWindowManager: Creating secondary window on external display');
 
     this.#secondaryWindow = new BrowserWindow({
-      width: config.width,
-      height: config.height,
+      width: externalDisplay.size.width,
+      height: externalDisplay.size.height,
+      x: externalDisplay.bounds.x,
+      y: externalDisplay.bounds.y,
       title: config.title,
       webPreferences: {
         nodeIntegration: false,
@@ -174,6 +168,7 @@ class DualWindowManager implements AppModule {
         sandbox: false,
         preload: this.#config.initConfig.preload.path,
       },
+      fullscreen: true, // Make it fullscreen by default
     });
 
     if (this.#config.openDevTools) {
