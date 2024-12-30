@@ -6,6 +6,7 @@ import { contextBridge, ipcRenderer } from 'electron';
 interface ElectronAPI {
   openSecondaryWindow: () => Promise<void>;
   sendToSecondary: (data: unknown) => Promise<void>;
+  closeSecondaryWindow: () => Promise<boolean>; 
   onDisplayContent: (callback: (data: unknown) => void) => void;
   removeDisplayContentListener: () => void;
 }
@@ -14,6 +15,7 @@ interface ElectronAPI {
 const electronAPI: ElectronAPI = {
   openSecondaryWindow: () => ipcRenderer.invoke('open-secondary-window'),
   sendToSecondary: (data) => ipcRenderer.invoke('send-to-secondary', data),
+  closeSecondaryWindow: () => ipcRenderer.invoke('close-secondary-window'),
   onDisplayContent: (callback) => {
     ipcRenderer.on('display-content', (_event, data) => callback(data));
   },

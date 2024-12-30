@@ -100,6 +100,18 @@ class DualWindowManager implements AppModule {
       this.#secondaryWindow?.webContents.send('display-content', data);
       return true;
     });
+
+    ipcMain.handle('close-secondary-window', () => {
+      console.log('DualWindowManager: Attempting to close secondary window');
+      
+      if (this.#secondaryWindow) {
+        this.#secondaryWindow.close();
+        this.#secondaryWindow = null;
+        return true;
+      }
+      
+      return false;
+    });
   }
 
   #getMainWindowConfig(): WindowConfig {
@@ -176,9 +188,9 @@ class DualWindowManager implements AppModule {
       fullscreen: true, // Make it fullscreen by default
     });
 
-    if (this.#config.openDevTools) {
-      this.#secondaryWindow.webContents.openDevTools();
-    }
+    // if (this.#config.openDevTools) {
+    //   this.#secondaryWindow.webContents.openDevTools();
+    // }
 
     if (this.#config.initConfig.renderer instanceof URL) {
       const secondaryUrl = new URL('/secondary', this.#config.initConfig.renderer);

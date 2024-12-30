@@ -115,3 +115,78 @@
 .modal-close:hover {
   background-color: #cbd5e1;
 }
+
+.screen-toggle-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.toggle-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 180px;
+  position: relative;
+  overflow: hidden;
+}
+
+.toggle-button:hover:not(:disabled) {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.toggle-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.toggle-button.active {
+  background: #dc2626;
+}
+
+.toggle-button.active:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+.toggle-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.button-text {
+  flex: 1;
+  text-align: center;
+}
