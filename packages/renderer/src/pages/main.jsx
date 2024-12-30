@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import ScreenToggle from '../components/home/ScreenToggle';
 
 // Separate Modal Component
 const Modal = ({ isOpen, title, message, type, onClose }) => {
@@ -162,7 +161,24 @@ const MainScreen = () => {
     <div className="container">
       <h1 className="main-title">Main Screen</h1>
 
-      <ScreenToggle />
+      <div className="screen-controls">
+        <button
+          className={`control-btn ${isSecondaryScreenActive ? 'active' : ''} ${loading ? 'loading' : ''}`}
+          onClick={handleTurnOnSecondaryScreen}
+          disabled={isSecondaryScreenActive || loading}
+        >
+          {loading && !isSecondaryScreenActive ? 'Turning On...' : 'Turn On Screen'}
+        </button>
+
+        <button
+          className={`control-btn off ${isSecondaryScreenActive ? 'active' : ''} ${loading ? 'loading' : ''}`}
+          onClick={handleTurnOffSecondaryScreen}
+          disabled={!isSecondaryScreenActive || loading}
+        >
+          {loading && isSecondaryScreenActive ? 'Turning Off...' : 'Turn Off Screen'}
+        </button>
+      </div>
+
       <div className="items-grid">
         {items.map(item => (
           <ItemCard key={item.id} item={item} onClick={handleItemClick} />
