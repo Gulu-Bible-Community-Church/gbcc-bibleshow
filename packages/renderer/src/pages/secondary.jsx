@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import '../assets/css/secondary.css';
 
 function SecondaryScreen() {
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState({
+    title: '',
+    content: ''
+  });
 
   useEffect(() => {
     const handleDisplayContent = (data) => {
@@ -10,28 +14,25 @@ function SecondaryScreen() {
     };
 
     if (window.electronAPI) {
-      console.log('SecondaryScreen: Setting up content listener');
       window.electronAPI.onDisplayContent(handleDisplayContent);
     }
 
     return () => {
       if (window.electronAPI) {
-        console.log('SecondaryScreen: Removing content listener');
         window.electronAPI.removeDisplayContentListener();
       }
     };
   }, []);
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Secondary Screen</h1>
-      {content ? (
-        <div className="p-4 border rounded-lg">
-          <h2 className="text-lg font-semibold">{content.title}</h2>
-          <p className="text-gray-600">{content.description}</p>
+    <div className="secondary-screen">
+      {content.title ? (
+        <div className="content">
+          <h2>{content.title}</h2>
+          <p>{content.content}</p>
         </div>
       ) : (
-        <p>No content to display</p>
+        <div className="waiting">Waiting for content...</div>
       )}
     </div>
   );

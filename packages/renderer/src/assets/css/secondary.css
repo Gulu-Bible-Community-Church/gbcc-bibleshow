@@ -1,0 +1,43 @@
+/* styles.css */
+.secondary-screen {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start; /* Align content to the top */
+	min-height: 100vh;
+	background-color: #000; /* bg-gray-900 */
+	color: white;
+	padding: 2rem; /* p-8 */
+  }
+  
+  .secondary-screen .content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: left; /* Align text to the left */
+	max-width: 80%; /* Limit width for better readability */
+	font-size: 2.5rem; /* Increase font size */
+	line-height: 1.6;
+  }
+  
+  .secondary-screen .content h2 {
+	font-size: 4rem; /* Larger font size for h2 */
+	font-weight: bold; /* font-bold */
+	text-align: center; /* Center h2 at the top */
+	margin-bottom: 2rem; /* mb-8 */
+  }
+  
+  .secondary-screen .content p {
+	font-size: 5.25rem; /* Larger font size for content */
+	line-height: 1.8;
+	max-width: 100%; /* Allow content to stretch */
+	text-align: justify; /* Justify the text */
+  }
+  
+  .secondary-screen .waiting {
+	font-size: 2rem; /* text-3xl */
+	color: #a0aec0; /* text-gray-400 */
+	text-align: center;
+  }
+  

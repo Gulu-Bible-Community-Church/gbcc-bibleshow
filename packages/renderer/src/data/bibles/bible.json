@@ -1,0 +1,134 @@
+{
+	"versions": [
+	  {
+		"name": "NIV",
+		"books": [
+		  {
+			"name": "Genesis",
+			"chapters": [
+			  {
+				"number": 1,
+				"verses": [
+				  "In the beginning God created the heavens and the earth.",
+				  "And God said, 'Let there be light.'"
+				]
+			  },
+			  {
+				"number": 2,
+				"verses": [
+				  "Thus the heavens and the earth were completed in all their vast array.",
+				  "By the seventh day, God had finished the work he had been doing."
+				]
+			  }
+			]
+		  },
+		  {
+			"name": "Exodus",
+			"chapters": [
+			  {
+				"number": 1,
+				"verses": [
+				  "These are the names of the sons of Israel who went to Egypt.",
+				  "Now Joseph and all his brothers died."
+				]
+			  },
+			  {
+				"number": 2,
+				"verses": [
+				  "Now a man of the tribe of Levi married a Levite woman.",
+				  "She became pregnant and gave birth to a son."
+				]
+			  }
+			]
+		  }
+		]
+	  },
+	  {
+		"name": "KJV",
+		"books": [
+		  {
+			"name": "Matthew",
+			"chapters": [
+			  {
+				"number": 1,
+				"verses": [
+				  "The book of the generation of Jesus Christ.",
+				  "Abraham begat Isaac; and Isaac begat Jacob."
+				]
+			  },
+			  {
+				"number": 2,
+				"verses": [
+				  "Now when Jesus was born in Bethlehem of Judaea.",
+				  "And being warned of God in a dream."
+				]
+			  }
+			]
+		  },
+		  {
+			"name": "Mark",
+			"chapters": [
+			  {
+				"number": 1,
+				"verses": [
+				  "The beginning of the gospel of Jesus Christ.",
+				  "John did baptize in the wilderness."
+				]
+			  },
+			  {
+				"number": 2,
+				"verses": [
+				  "And again he entered into Capernaum.",
+				  "And they came unto him, bringing one sick of the palsy."
+				]
+			  }
+			]
+		  }
+		]
+	  },
+	  {
+		"name": "ESV",
+		"books": [
+		  {
+			"name": "Psalms",
+			"chapters": [
+			  {
+				"number": 1,
+				"verses": [
+				  "Blessed is the man who walks not in the counsel of the wicked.",
+				  "He is like a tree planted by streams of water."
+				]
+			  },
+			  {
+				"number": 2,
+				"verses": [
+				  "Why do the nations rage and the peoples plot in vain?",
+				  "The kings of the earth set themselves."
+				]
+			  }
+			]
+		  },
+		  {
+			"name": "Proverbs",
+			"chapters": [
+			  {
+				"number": 1,
+				"verses": [
+				  "The proverbs of Solomon, son of David.",
+				  "The fear of the Lord is the beginning of knowledge."
+				]
+			  },
+			  {
+				"number": 2,
+				"verses": [
+				  "My son, if you accept my words.",
+				  "Then you will understand the fear of the Lord."
+				]
+			  }
+			]
+		  }
+		]
+	  }
+	]
+  }
+  
