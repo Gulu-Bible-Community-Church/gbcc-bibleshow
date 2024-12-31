@@ -1,28 +1,33 @@
-import React from 'react'
-// import { Check } from 'lucide-react';
+import React from 'react';
+import { LuChevronsUpDown } from "react-icons/lu";
 
 const VersionSelection = ({ versions, selectedVersion, setSelectedVersion }) => {
-	return (
-		<div className="mb-6">
-			<label className="text-sm font-medium text-gray-800 mb-2 block">
-				Bible Version
-			</label>
-			<div className="grid grid-cols-1 gap-2">
-				{versions.map(version => (
-					<button
-						key={version.name}
-						onClick={() => setSelectedVersion(version.name)}
-						className={`py-2 px-4 rounded-lg text-sm border transition-all duration-200 flex items-center justify-center
-						${selectedVersion === version.name
-								? 'bg-blue-100 text-blue-700 border-blue-200'
-								: 'border-gray-200 bg-gray-50 hover:bg-gray-100'}`}
-					>
-						{version.name}
-					</button>
-				))}
-			</div>
-		</div>
-	)
-}
+  return (
+    <div className="mb-6 max-w-md">
+      <label 
+        htmlFor="version-select" 
+        className="block text-lg font-bold text-gray-800 mb-3">
+        Select Bible Version
+      </label>
+      <div className="relative">
+        <select
+          id="version-select"
+          value={selectedVersion}
+          onChange={(e) => setSelectedVersion(e.target.value)}
+          className="w-full py-2.5 px-3 rounded-lg text-sm font-medium border border-gray-200 
+            bg-white hover:border-gray-300 focus:border-blue-300 focus:ring-2 
+            focus:ring-blue-100 outline-none appearance-none cursor-pointer pr-10"
+        >
+          {versions.map(version => (
+            <option key={version.name} value={version.name}>
+              {version.name}
+            </option>
+          ))}
+        </select>
+        <LuChevronsUpDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+      </div>
+    </div>
+  );
+};
 
-export default VersionSelection
+export default VersionSelection;
