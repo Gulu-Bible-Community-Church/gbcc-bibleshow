@@ -1,7 +1,9 @@
 import React from 'react'
 import { BiBook, BiSearch } from 'react-icons/bi';
 
-const BookListSection = ({ filteredBooks, setSelectedBook, setSelectedChapter, searchQuery, selectedBook, setSearchQuery  }) => {
+const BookListSection = ({ filteredBooks, setSelectedBook, setSelectedChapter, searchQuery, selectedBook, setSearchQuery, selectedVersion }) => {
+
+	console.log('selectedVersion', selectedVersion)
 	return (
 		<>
 			<div className="relative mb-4">
@@ -16,8 +18,8 @@ const BookListSection = ({ filteredBooks, setSelectedBook, setSelectedChapter, s
 			</div>
 
 			<div className="flex-1 overflow-hidden flex flex-col">
-				<label className="text-sm font-medium text-gray-800 mb-2">
-					Books
+				<label className="block text-lg font-bold text-gray-800 mb-3">
+					{selectedVersion} Books
 				</label>
 				<div className="flex-1 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
 					{filteredBooks.map(book => (
