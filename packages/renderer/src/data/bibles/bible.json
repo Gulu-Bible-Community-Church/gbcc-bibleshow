@@ -10,14 +10,7 @@
 				"number": 1,
 				"verses": [
 				  "In the beginning God created the heavens and the earth.",
-				  "And God said, 'Let there be light.'"
-				]
-			  },
-			  {
-				"number": 2,
-				"verses": [
-				  "Thus the heavens and the earth were completed in all their vast array.",
-				  "By the seventh day, God had finished the work he had been doing."
+				  "And God said, 'Let there be light,' and there was light."
 				]
 			  }
 			]
@@ -28,15 +21,8 @@
 			  {
 				"number": 1,
 				"verses": [
-				  "These are the names of the sons of Israel who went to Egypt.",
-				  "Now Joseph and all his brothers died."
-				]
-			  },
-			  {
-				"number": 2,
-				"verses": [
-				  "Now a man of the tribe of Levi married a Levite woman.",
-				  "She became pregnant and gave birth to a son."
+				  "These are the names of the sons of Israel who went to Egypt with Jacob, each with his family.",
+				  "Now Joseph and all his brothers and all that generation died."
 				]
 			  }
 			]
@@ -47,39 +33,25 @@
 		"name": "KJV",
 		"books": [
 		  {
-			"name": "Matthew",
+			"name": "Genesis",
 			"chapters": [
 			  {
 				"number": 1,
 				"verses": [
-				  "The book of the generation of Jesus Christ.",
-				  "Abraham begat Isaac; and Isaac begat Jacob."
-				]
-			  },
-			  {
-				"number": 2,
-				"verses": [
-				  "Now when Jesus was born in Bethlehem of Judaea.",
-				  "And being warned of God in a dream."
+				  "In the beginning God created the heaven and the earth.",
+				  "And God said, Let there be light: and there was light."
 				]
 			  }
 			]
 		  },
 		  {
-			"name": "Mark",
+			"name": "Exodus",
 			"chapters": [
 			  {
 				"number": 1,
 				"verses": [
-				  "The beginning of the gospel of Jesus Christ.",
-				  "John did baptize in the wilderness."
-				]
-			  },
-			  {
-				"number": 2,
-				"verses": [
-				  "And again he entered into Capernaum.",
-				  "And they came unto him, bringing one sick of the palsy."
+				  "Now these are the names of the children of Israel, which came into Egypt; every man and his household came with Jacob.",
+				  "And Joseph died, and all his brethren, and all that generation."
 				]
 			  }
 			]
@@ -90,39 +62,83 @@
 		"name": "ESV",
 		"books": [
 		  {
-			"name": "Psalms",
+			"name": "Genesis",
 			"chapters": [
 			  {
 				"number": 1,
 				"verses": [
-				  "Blessed is the man who walks not in the counsel of the wicked.",
-				  "He is like a tree planted by streams of water."
-				]
-			  },
-			  {
-				"number": 2,
-				"verses": [
-				  "Why do the nations rage and the peoples plot in vain?",
-				  "The kings of the earth set themselves."
+				  "In the beginning, God created the heavens and the earth.",
+				  "And God said, “Let there be light,” and there was light."
 				]
 			  }
 			]
 		  },
 		  {
-			"name": "Proverbs",
+			"name": "Exodus",
 			"chapters": [
 			  {
 				"number": 1,
 				"verses": [
-				  "The proverbs of Solomon, son of David.",
-				  "The fear of the Lord is the beginning of knowledge."
+				  "These are the names of the sons of Israel who came to Egypt with Jacob, each with his household:",
+				  "Then Joseph died, and all his brothers and all that generation."
 				]
-			  },
+			  }
+			]
+		  }
+		]
+	  },
+	  {
+		"name": "NLT",
+		"books": [
+		  {
+			"name": "Genesis",
+			"chapters": [
 			  {
-				"number": 2,
+				"number": 1,
 				"verses": [
-				  "My son, if you accept my words.",
-				  "Then you will understand the fear of the Lord."
+				  "In the beginning God created the heavens and the earth.",
+				  "Then God said, “Let there be light,” and there was light."
+				]
+			  }
+			]
+		  },
+		  {
+			"name": "Exodus",
+			"chapters": [
+			  {
+				"number": 1,
+				"verses": [
+				  "These are the names of the sons of Israel who went to Egypt with Jacob, each with his family:",
+				  "Eventually, Joseph and all his brothers died, ending that entire generation."
+				]
+			  }
+			]
+		  }
+		]
+	  },
+	  {
+		"name": "AMP",
+		"books": [
+		  {
+			"name": "Genesis",
+			"chapters": [
+			  {
+				"number": 1,
+				"verses": [
+				  "In the beginning God (Elohim) created [by forming from nothing] the heavens and the earth.",
+				  "And God said, 'Let there be light'; and there was light."
+				]
+			  }
+			]
+		  },
+		  {
+			"name": "Exodus",
+			"chapters": [
+			  {
+				"number": 1,
+				"verses": [
+				  "Now these are the names of the sons of Israel who came to Egypt with Jacob; each one with his household:",
+				  "Then Joseph died, and all his brothers and all that generation."
 				]
 			  }
 			]

@@ -273,3 +273,256 @@
 	position: relative;
 	opacity: 0.8;
   }
+  /* Existing CSS */
+.container {
+	display: flex;
+	height: 100vh;
+	background-color: #f3f4f6;
+  }
+  
+  /* ... (keeping all existing CSS from the provided document) ... */
+  
+  /* New CSS for Chapters and Verses */
+  .chapter-header {
+	margin-bottom: 1.5rem;
+  }
+  
+  .back-button {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem 1rem;
+	color: #2563eb;
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 0.875rem;
+	margin-bottom: 1rem;
+  }
+  
+  .back-button:hover {
+	color: #1d4ed8;
+  }
+  
+  .chapter-header h3 {
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: #1f2937;
+	margin-bottom: 1rem;
+  }
+  
+  .chapters-grid {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 1rem;
+	padding: 1rem;
+  }
+  
+  .chapter-button {
+	padding: 1rem;
+	background-color: white;
+	border: 1px solid #e5e7eb;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	text-align: center;
+	transition: all 0.2s ease;
+  }
+  
+  .chapter-button:hover {
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chapter-button span {
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: #374151;
+  }
+  
+  .verses-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1rem;
+	padding: 1rem;
+  }
+  
+  .verse-item {
+	background-color: white;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	border: 1px solid #e5e7eb;
+	transition: all 0.2s ease;
+  }
+  
+  .verse-item:hover {
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .verse-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.5rem;
+  }
+  
+  .verse-header span {
+	font-weight: 600;
+	color: #374151;
+  }
+  
+  .show-verse {
+	color: #2563eb;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0.25rem;
+	transition: color 0.2s ease;
+  }
+  
+  .show-verse:hover {
+	color: #1d4ed8;
+  }
+  
+  /* Modal Styles */
+  
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+	.chapters-grid {
+	  grid-template-columns: repeat(4, 1fr);
+	}
+  }
+  
+  @media (max-width: 768px) {
+	.chapters-grid {
+	  grid-template-columns: repeat(3, 1fr);
+	}
+  
+	.container {
+	  flex-direction: column;
+	}
+  
+	.sidebar {
+	  max-width: none;
+	  height: auto;
+	}
+  
+	.book-list {
+	  height: 200px;
+	}
+  }
+  
+  @media (max-width: 480px) {
+	.chapters-grid {
+	  grid-template-columns: repeat(2, 1fr);
+	}
+  
+	.screen-controls {
+	  flex-direction: column;
+	}
+  
+	.control-btn {
+	  width: 100%;
+	}
+  }
+  /* Screen Toggle Switch */
+.screen-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	margin-bottom: 2rem;
+  }
+  
+  .switch-label {
+	font-size: 1.1rem;
+	color: #374151;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+  }
+  
+  .switch-container {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+  }
+  
+  .switch-container input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+  }
+  
+  .switch-slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #dc2626;
+	transition: .4s;
+	border-radius: 34px;
+  }
+  
+  .switch-slider:before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	transition: .4s;
+	border-radius: 50%;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  input:checked + .switch-slider {
+	background-color: #2563eb;
+  }
+  
+  input:checked + .switch-slider:before {
+	transform: translateX(26px);
+  }
+  
+  /* Loading state */
+  .switch-container.loading .switch-slider {
+	opacity: 0.7;
+  }
+  
+  .switch-container.loading .switch-slider:before {
+	animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+	0% {
+	  box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+	}
+	70% {
+	  box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
+	}
+	100% {
+	  box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+	}
+  }
+  
+  /* Status indicator */
+  .status-indicator {
+	font-size: 0.875rem;
+	font-weight: 500;
+	padding: 0.25rem 0.75rem;
+	border-radius: 9999px;
+	transition: all 0.3s ease;
+  }
+  
+  .status-indicator.on {
+	background-color: #dcfce7;
+	color: #166534;
+  }
+  
+  .status-indicator.off {
+	background-color: #fee2e2;
+	color: #991b1b;
+  }
