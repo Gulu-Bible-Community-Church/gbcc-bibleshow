@@ -7,17 +7,27 @@ import { hardwareAccelerationMode } from './modules/HardwareAccelerationModule.j
 import { autoUpdater } from './modules/AutoUpdater.js';
 import { allowInternalOrigins } from './modules/BlockNotAllowedOrigins.js';
 import { allowExternalUrls } from './modules/ExternalUrls.js';
-import { ipcMain } from 'electron';
+import { app, ipcMain } from 'electron';
 
 function setupWindowIPC() {
   console.log('Main: Setting up window IPC handlers');
+  
+  // Existing handler
   ipcMain.handle('window-message', async (_event, message) => {
     console.log('Main: Window message received:', message);
+  });
+
+  // Add this new handler for user data path
+  ipcMain.handle('get-user-data-path', () => {
+    console.log('Main: Getting user data path:', app.getPath('userData'));
+    return app.getPath('userData');
   });
 }
 
 export async function initApp(initConfig: AppInitConfig) {
   console.log('Main: Initializing application');
+  
+  // Make sure IPC is set up before other modules
   setupWindowIPC();
 
   const moduleRunner = createModuleRunner()

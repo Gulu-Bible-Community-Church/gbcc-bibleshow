@@ -5,12 +5,14 @@ import Modal from '../utils/Modal';
 import SidebarSection from '../components/home/SidebarSection';
 import ChapterSection from '../components/home/ChapterSection';
 import MainContent from '../components/home/MainContent';
+import { BiSearch, BiBook, BiBook as BiPresentation } from 'react-icons/bi';
+import SinglePresentation from '../components/presentation/SinglePresentation';
 
 
 
 const MainScreen = () => {
   // State management
-  const [selectedVersion, setSelectedVersion] = useState('');
+  const [selectedVersion, setSelectedVersion] = useState('KJV');
   const [selectedBook, setSelectedBook] = useState('');
   const [selectedChapter, setSelectedChapter] = useState(null);
   const [selectedChapterNumber, setSelectedChapterNumber] = useState(1);
@@ -43,6 +45,17 @@ const MainScreen = () => {
   const chapters = selectedBookData ? selectedBookData.chapters : [];
   const selectedChapterData = selectedChapter ? chapters.find(chapter => chapter.number === selectedChapter) : null;
   const verses = selectedChapterData ? selectedChapterData.verses : [];
+
+  const [activeTab, setActiveTab] = useState('bible');
+
+  const [selectedPresentation, setSelectedPresentation] = useState(null);
+
+
+  const tabs = [
+    { id: 'bible', label: 'Bible', icon: BiBook },
+    { id: 'presentation', label: 'Presentation', icon: BiPresentation }
+  ];
+
 
   // Modal management
   const showModal = useCallback((title, message, type = 'error') => {
@@ -143,10 +156,16 @@ const MainScreen = () => {
   };
 
 
+  const handleSelectPresentation = (presentation) => {
+    console.log('MainScreen: Selected Presentation', presentation);
+    setSelectedPresentation(presentation);
+  };
+
+
 
   return (
     <div className="flex h-screen overflow-hidden">
-   
+
       <Modal
         isOpen={modalState.isOpen}
         title={modalState.title}
@@ -167,11 +186,21 @@ const MainScreen = () => {
         showVersions={showVersions}
         setShowVersions={setShowVersions}
         versions={versions}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        tabs={tabs}
+        onSelectPresentation={handleSelectPresentation}
       />
-      <ChapterSection
-        chapters={chapters}
-        handleChapterSelect={handleChapterSelect}
-      />
+      {activeTab === 'presentation' ? (
+        <SinglePresentation selectedPresentation={selectedPresentation} />
+      ) : (
+        <ChapterSection
+          chapters={chapters}
+          handleChapterSelect={handleChapterSelect}
+
+        />
+      )}
+
 
       {/* MainContent */}
       <MainContent
