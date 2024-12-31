@@ -5,7 +5,7 @@ const ChapterSection = ({chapters, handleChapterSelect}) => {
 	return (
 		<div className="controls">
 			<div className="search-container">
-				<label>Search</label>
+				<label>Chapters</label>
 				<div className="chapters-grid">
 					{chapters.map((chapter) => (
 						<button
@@ -14,7 +14,7 @@ const ChapterSection = ({chapters, handleChapterSelect}) => {
 							onClick={() => handleChapterSelect(chapter.number)}
 						>
 							<span>
-								Chapter {chapter.number}
+								 {chapter.number}
 							</span>
 						</button>
 					))}
