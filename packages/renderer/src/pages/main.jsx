@@ -1,8 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { FaBible, FaSearch, FaCog, FaPlay, FaChevronDown, FaBookOpen, FaEye, FaArrowLeft } from 'react-icons/fa';
 import bibleData from '../data/bibles/bible.json';
 import '../assets/css/main.css';
-import { FaDisplay, } from 'react-icons/fa6';
 import Modal from '../utils/Modal';
 import SidebarSection from '../components/home/SidebarSection';
 import ChapterSection from '../components/home/ChapterSection';
@@ -12,9 +10,10 @@ import MainContent from '../components/home/MainContent';
 
 const MainScreen = () => {
   // State management
-  const [selectedVersion, setSelectedVersion] = useState('NIV');
-  const [selectedBook, setSelectedBook] = useState('Mark');
+  const [selectedVersion, setSelectedVersion] = useState('');
+  const [selectedBook, setSelectedBook] = useState('');
   const [selectedChapter, setSelectedChapter] = useState(null);
+  const [selectedChapterNumber, setSelectedChapterNumber] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [showVersions, setShowVersions] = useState(false);
   const [selectedVerse, setSelectedVerse] = useState(null);
@@ -137,15 +136,17 @@ const MainScreen = () => {
 
   // Navigation handlers
   const handleChapterSelect = (chapterNumber) => {
+    setSelectedChapterNumber(chapterNumber);
+    console.log("Chapter selected from parent: ", selectedBook, chapterNumber, selectedVersion);
     setSelectedChapter(chapterNumber);
-    setSelectedVerse(null);
+    // setSelectedVerse(null);
   };
 
 
 
   return (
-    <div className="container">
-      {/* Modal */}
+    <div className="flex h-screen overflow-hidden">
+   
       <Modal
         isOpen={modalState.isOpen}
         title={modalState.title}

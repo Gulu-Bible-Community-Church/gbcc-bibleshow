@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaDisplay } from 'react-icons/fa6';
 import { FaBookOpen } from 'react-icons/fa';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+// import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const MainContent = ({
   loading,
@@ -45,6 +45,8 @@ const MainContent = ({
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [activeVerseIndex, verses]);
+
+  console.log("verses coming in...", verses);
 
   return (
     <div className="main-content">
@@ -94,13 +96,25 @@ const MainContent = ({
                 </h3>
               </div>
               <div className="verses-grid">
-                {verses.map((verse, index) => (
+                {/* {
+                  verses.map((verse) => {
+                    console.log(verse)
+                    return (
+                      <>
+                      <p>hello</p>
+                      </>
+                    )
+                  })
+                } */}
+                {verses.map((verse, index) => {
+                  console.log(verse, index)
+                  return (
                   <div
                     key={index}
                     className={`verse-item ${index === activeVerseIndex ? 'ring-2 ring-blue-500' : ''}`}
                     onClick={() => {
                       setActiveVerseIndex(index);
-                      handleVerseDisplay(verse, index);
+                      handleVerseDisplay(verse.text, index);
                     }}
                   >
                     <div className="verse-header">
@@ -112,15 +126,15 @@ const MainContent = ({
                         onClick={(e) => {
                           e.stopPropagation();
                           setActiveVerseIndex(index);
-                          handleVerseDisplay(verse, index);
+                          handleVerseDisplay(verse.text, index);
                         }}
                       >
                         <FaBookOpen />
                       </button>
                     </div>
-                    <p>{verse}</p>
+                    <p>{verse.text}</p>
                   </div>
-                ))}
+                )})}
               </div>
             </>
           ) : null}
