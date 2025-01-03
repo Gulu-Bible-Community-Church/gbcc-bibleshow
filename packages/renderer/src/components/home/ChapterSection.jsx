@@ -150,7 +150,7 @@ const ChapterSection = ({
                   <BiChevronLeft className="w-4 h-4 mr-1" />
                   Previous
                 </button>
-
+ 
                 <button 
                   onClick={() => navigateVerse(1)}
                   disabled={!canNavigateNext}
