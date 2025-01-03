@@ -150,7 +150,7 @@ const MainScreen = () => {
   // Navigation handlers
   const handleChapterSelect = (chapterNumber) => {
     setSelectedChapterNumber(chapterNumber);
-    console.log("Chapter selected from parent: ", selectedBook, chapterNumber, selectedVersion);
+    // console.log("Chapter selected from parent: ", selectedBook, chapterNumber, selectedVersion);
     setSelectedChapter(chapterNumber);
     // setSelectedVerse(null);
   };
@@ -197,7 +197,8 @@ const MainScreen = () => {
         <ChapterSection
           chapters={chapters}
           handleChapterSelect={handleChapterSelect}
-
+          selectedVersion={selectedVersion}
+          handleVerseDisplay={handleVerseDisplay}
         />
       )}
 

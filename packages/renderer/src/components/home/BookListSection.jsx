@@ -3,7 +3,7 @@ import { BiBook, BiSearch } from 'react-icons/bi';
 
 const BookListSection = ({ filteredBooks, setSelectedBook, setSelectedChapter, searchQuery, selectedBook, setSearchQuery, selectedVersion }) => {
 
-	console.log('selectedVersion', selectedVersion)
+	// console.log('selectedVersion', selectedVersion)
 	return (
 		<>
 			<div className="relative mb-4">

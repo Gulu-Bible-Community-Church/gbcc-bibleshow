@@ -46,7 +46,7 @@ const MainContent = ({
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [activeVerseIndex, verses]);
 
-  console.log("verses coming in...", verses);
+  // console.log("verses coming in...", verses);
 
   return (
     <div className="main-content">
@@ -107,7 +107,7 @@ const MainContent = ({
                   })
                 } */}
                 {verses.map((verse, index) => {
-                  console.log(verse, index)
+                  // console.log(verse, index)
                   return (
                   <div
                     key={index}
